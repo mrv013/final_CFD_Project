@@ -527,7 +527,7 @@ function b_c(tp)
         p = 1.0
 	    gamma=1.4
 		a=sqrt(gamma*p/rho)
-		u = 1.2*a
+		u = 1.5*a
 	    e = p/(rho*(gamma-1.0)) + 0.5*u*u
 		coeff=[0 0 0]
         constant = [rho rho*u rho*e]
