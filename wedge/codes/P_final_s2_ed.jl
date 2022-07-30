@@ -117,20 +117,20 @@ end
 
 
 ##
-n=200
+n=100
 nx =n;ny = n
 x_left = 0.0 ;x_right = 1.0 ;y_bottom = 0.0 ;y_top = 1.0
 L_x=x_right-x_left;L_y=y_top-y_bottom
 dx = (L_x)/nx ; dy = (L_y)/ny
 ##dt = time element;tf = end time;nt =
-dt = 0.0001;end_time = 1;nt = Int64(end_time/dt)
+dt = 0.0001;end_time = 0.8;nt = Int64(end_time/dt)
 ##
 gamma=1.4
 rho = 1.0
 p = 1.0
 gamma=1.4
 a=sqrt(gamma*p/rho)
-CFL=(1.2*a+a)*dt/dx
+CFL=(1.5*a+a)*dt/dx
 x_range=LinRange(0,L_x-dx,nx).+0.5*dx;
 y_range=LinRange(0,L_y-dy,ny).+0.5*dy
 ##
@@ -152,11 +152,12 @@ PlotlyJS.plot(D2_q_0_contour_ρ,layout_ρ0)
 using PyPlot;
 close("all");pygui(true)
 PyPlot.figure()
-PyPlot.contour(x_range, y_range, D2_q.endtime[:,:,1],100)
+PyPlot.contour(x_range, y_range, D2_q.endtime[:,:,4],100)
 PyPlot.xlabel("Y")
 PyPlot.ylabel("X")
 PyPlot.colorbar()
 PyPlot.show()
+
 
 D2_q_end_contour_1 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.stor[:,:,1,8000])
 layout_ρ = Layout(;xaxis_title="x",yaxis_title="y",font_size=14,title="ρ,Mach: α:$alfa,grid:$n*$n,dt:$dt,time:$end_time",titlefont_size=14)
@@ -164,16 +165,16 @@ PlotlyJS.plot(D2_q_end_contour_1,layout_ρ)
 
 
 
-D2_q_end_contour_2 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.endtime[:,:,2])
+D2_q_end_contour_2 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.stor[:,:,2,8000])
 layout_ρu = Layout(;xaxis_title="x",yaxis_title="y",font_size=14,title="ρ*u,Mach: α:$alfa,grid:$n*$n,dt:$dt,time:$end_time",titlefont_size=14)
 PlotlyJS.plot(D2_q_end_contour_2,layout_ρu)
 
 
-D2_q_end_contour_3 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.endtime[:,:,3])
+D2_q_end_contour_3 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.stor[:,:,3,8000])
 layout_ρv = Layout(;xaxis_title="x",yaxis_title="y",font_size=14,title="ρ*v,Mach: α:$alfa,grid:$n*$n,dt:$dt,time:$end_time",titlefont_size=14)
 PlotlyJS.plot(D2_q_end_contour_3,layout_ρv)
 
-D2_q_end_contour_4 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.endtime[:,:,4])
+D2_q_end_contour_4 = PlotlyJS.contour(x=x_range,y=y_range,z=D2_q.stor[:,:,4,8000])
 layout_e = Layout(;xaxis_title="x",yaxis_title="y",font_size=14,title="ρ*e,Mach: α:$alfa,grid:$n*$n,dt:$dt,time:$end_time",titlefont_size=14)
 PlotlyJS.plot(D2_q_end_contour_4,layout_e)
 #D2_q_for_1_line=generate_all_time_for_1_line(n,L_y,L_x,end_time,dt,alfa,y0,x0,gamma,x_line_want_L)
